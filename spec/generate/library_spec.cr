@@ -27,6 +27,15 @@ module Generate
       license.should be_including("Copyright (c) #{year} John Smith")
     end
 
+    describe_file "example/LICENSE", { :re_run => "true" } do |license|
+      # TODO: Create a library along the lines of ruby timecop and use it here to mock year
+      year = Time.now.year
+
+      Timecop.freeze(3.years.from_now) do
+        license.should be_including("Copyright (c) #{year + 3} John Smith")
+      end
+    end
+
     describe_file "example/Projectfile" do |projectfile|
       projectfile.should eq(%{deps do\nend})
     end
