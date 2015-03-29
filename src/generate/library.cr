@@ -1,7 +1,12 @@
+require "ecr/macros"
 require "./library/*"
 
 module Generate
   module Library
-    # TODO Put your code here
+    extend self
+
+    def run(config)
+      Runner.new(config).run
+    end
   end
 end
