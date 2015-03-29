@@ -7,7 +7,8 @@ module Generate
       end
 
       def render
-        File.write("#{config.dir}/#{config.name}/#{path}", to_s)
+        config.logger.info("File #{full_path}")
+        File.write(full_path, to_s)
       end
 
       def path
@@ -16,6 +17,10 @@ module Generate
 
       def to_s(io)
         fail "Abstract method #to_s"
+      end
+
+      private def full_path
+        "#{config.dir}/#{config.name}/#{path}"
       end
     end
   end

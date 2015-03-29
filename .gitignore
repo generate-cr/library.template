@@ -2,3 +2,4 @@
 .crystal/
 .deps.lock
 tmp/
+generate-library

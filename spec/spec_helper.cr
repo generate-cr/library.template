@@ -19,7 +19,7 @@ module TestSupport
   private def _run_once(name, author_name)
     Dir.mkdir_p("tmp/#{name}")
     `rm -r tmp/#{name}`
-    config = Generate::Library::Config.new(name, author_name, "tmp")
+    config = Generate::Library::Config.new(name, author_name, NullLogger, "tmp")
     Generate::Library.run(config)
   end
 
@@ -42,6 +42,13 @@ module TestSupport
     private def _contents
       TestSupport.run_once(options)
       File.read(path)
+    end
+  end
+
+  module NullLogger
+    extend self
+
+    def info(str)
     end
   end
 end
