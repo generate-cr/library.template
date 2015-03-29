@@ -1,5 +1,7 @@
 # library.template
 
+[![Build Status](https://travis-ci.org/generate-cr/library.template.svg?branch=master)](https://travis-ci.org/generate-cr/library.template)
+
 Library template for usage with generate.cr.
 
 ## Installation
