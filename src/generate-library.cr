@@ -11,4 +11,5 @@ end
 name = ARGV.shift
 author = `git config --get user.name`.strip
 
-puts [name, author].inspect
+config = Generate::Library::Config.new(name, author)
+Generate::Library.run(config)
