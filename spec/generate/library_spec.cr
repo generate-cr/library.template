@@ -22,13 +22,11 @@ module Generate
     end
 
     describe_file "example/LICENSE" do |license|
-      # TODO: Create a library along the lines of ruby timecop and use it here to mock year
       year = Time.now.year
       license.should be_including("Copyright (c) #{year} John Smith")
     end
 
     describe_file "example/LICENSE", { :re_run => "true" } do |license|
-      # TODO: Create a library along the lines of ruby timecop and use it here to mock year
       year = Time.now.year
 
       Timecop.freeze(3.years.from_now) do
@@ -154,7 +152,6 @@ end
 
     context "with different author" do
       describe_file "example/LICENSE", DIFFERENT_AUTHOR do |license|
-        # TODO: Create a library along the lines of ruby timecop and use it here to mock year
         year = Time.now.year
         license.should be_including("Copyright (c) #{year} Mary Johnson")
       end
