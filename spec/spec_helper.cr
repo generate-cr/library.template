@@ -1,2 +1,2 @@
 require "spec"
-require "../src/library"
+require "../src/generate/library"
