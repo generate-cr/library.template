@@ -1,3 +1,4 @@
 deps do
   github "waterlink/timecop.cr"
+  github "generate-cr/generate"
 end

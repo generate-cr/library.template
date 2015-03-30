@@ -2,6 +2,7 @@ require "spec"
 require "../src/generate/library"
 require "yaml"
 require "timecop"
+require "generate/generate/spec_helper"
 
 module TestSupport
   extend self
@@ -24,28 +25,6 @@ module TestSupport
     Generate::Library.run(config)
   end
 
-  # Lazy file reference
-  struct DescribedFile
-    property path
-    property options
-
-    def initialize(@path, @options)
-    end
-
-    def should(matcher)
-      contents.should(matcher)
-    end
-
-    def contents
-      @_contents ||= _contents
-    end
-
-    private def _contents
-      TestSupport.run_once(options)
-      File.read(path)
-    end
-  end
-
   module NullLogger
     extend self
 
@@ -54,35 +33,10 @@ module TestSupport
   end
 end
 
-class IncludeExpectation
-  getter value
-  getter target
-
-  def initialize(@value)
-  end
-
-  def match(target)
-    @target = target
-    target.to_s.includes?(value)
-  end
-
-  def failure_message
-    "expected %{#{target}} to include %{#{value}}"
-  end
-
-  def negative_failure_message
-    "expected %{#{target}} not to include %{#{value}}"
-  end
-end
-
-def be_including(value)
-  IncludeExpectation.new(value)
-end
-
 def describe_file(path, options = {} of Symbol => String)
   describe "file #{path}" do
     it "has proper content" do
-      yield(TestSupport::DescribedFile.new("tmp/#{path}", options))
+      yield(Generate::SpecHelper::DescribedFile.new("tmp/#{path}", -> { TestSupport.run_once(options) }))
     end
   end
 end
