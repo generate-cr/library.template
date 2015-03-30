@@ -33,10 +33,4 @@ module TestSupport
   end
 end
 
-def describe_file(path, options = {} of Symbol => String)
-  describe "file #{path}" do
-    it "has proper content" do
-      yield(Generate::SpecHelper::DescribedFile.new("tmp/#{path}", -> { TestSupport.run_once(options) }))
-    end
-  end
-end
+define_describe_file "tmp", TestSupport.run_once(options)
