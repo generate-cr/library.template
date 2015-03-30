@@ -2,7 +2,7 @@ require "spec"
 require "../src/generate/library"
 require "yaml"
 require "timecop"
-require "generate/generate/spec_helper"
+require "generate/spec_helper"
 
 module TestSupport
   extend self
