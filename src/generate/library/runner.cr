@@ -1,8 +1,8 @@
+require "generate/runner"
+
 module Generate
   module Library
-    struct Runner
-      property config
-
+    struct Runner < Generate::Runner
       def views
         [
          DirsView,
@@ -19,14 +19,11 @@ module Generate
         ]
       end
 
-      def initialize(@config)
-      end
-
-      def run
-        views.each do |view|
-          view.new(config).render
-        end
-        true
+      def config
+        @_config ||= Config.new(raw_config[:name],
+                                raw_config[:author_name],
+                                logger,
+                                raw_config[:dir])
       end
     end
   end
