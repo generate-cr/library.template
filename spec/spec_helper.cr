@@ -2,6 +2,7 @@ require "spec"
 require "../src/generate/library"
 require "yaml"
 require "timecop"
+require "generate"
 require "generate/spec_helper"
 
 module TestSupport
@@ -21,10 +22,8 @@ module TestSupport
   private def _run_once(name, author_name)
     Dir.mkdir_p("tmp/#{name}")
     `rm -r tmp/#{name}`
-    Generate::Library.run({ :name => name,
-                            :author_name => author_name,
-                            :logger => "null",
-                            :dir => "tmp" })
+    Generate.run(["library", name, "--author=#{author_name}", "--logger=null", "--dir=tmp"])
+    true
   end
 end
 
