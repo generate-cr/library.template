@@ -6,7 +6,8 @@ module Generate
       def views
         [
          DirsView,
-         KeepView,
+         LibsKeepView,
+         SpecKeepView,
          GitignoreView,
          TravisView,
          LicenseView,
