@@ -3,10 +3,9 @@ module Generate
     struct Config
       property name
       property author_name
-      property logger
       property dir
 
-      def initialize(@name, @author_name, @logger, @dir = ".")
+      def initialize(@name, @author_name, @dir = ".")
       end
 
       def module_name

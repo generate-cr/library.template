@@ -23,7 +23,6 @@ module Generate
       def config
         @_config ||= Config.new(raw_config[:name],
                                 raw_config[:author_name],
-                                logger,
                                 raw_config[:dir])
       end
     end
