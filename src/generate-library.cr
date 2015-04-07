@@ -1,7 +1,6 @@
 # Example direct usage of Generate::Library
 
 require "./generate/library"
-require "logger"
 
 usage="USAGE: generate-library <name>"
 
