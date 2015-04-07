@@ -1,7 +1,6 @@
 # Example direct usage of Generate::Library
 
 require "./generate/library"
-require "logger"
 
 usage="USAGE: generate-library <name>"
 
@@ -14,6 +13,7 @@ end
 name = ARGV.shift
 author = `git config --get user.name`.strip
 
-logger = Logger.new(STDOUT)
-config = Generate::Library::Config.new(name, author, logger)
-Generate::Library.run(config)
+Generate::Library.run({ :name => name,
+                        :author_name => author,
+                        :logger => "default",
+                        :dir => "." })

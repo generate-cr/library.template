@@ -1,12 +1,13 @@
+require "generate/runner"
+
 module Generate
   module Library
-    struct Runner
-      property config
-
+    class Runner < Generate::Runner
       def views
         [
          DirsView,
-         KeepView,
+         LibsKeepView,
+         SpecKeepView,
          GitignoreView,
          TravisView,
          LicenseView,
@@ -19,15 +20,51 @@ module Generate
         ]
       end
 
-      def initialize(@config)
+      def config
+        @_config ||= Config.new(raw_config[:name],
+                                raw_config[:author_name],
+                                raw_config[:dir])
+      end
+    end
+
+    class RunnerFactory < Generate::RunnerFactory
+      getter raw_config
+
+      def initialize
+        @raw_config = {} of Symbol => String
       end
 
-      def run
-        views.each do |view|
-          view.new(config).render
+      def parse_opts(opts)
+        initialize
+
+        opts.on("--author AUTHOR_NAME",
+                "Author name, example: 'John Smith', defaults to git configuration") do |author_name|
+          raw_config[:author_name] = author_name
         end
-        true
+
+        opts.on("--dir DIR", "Path to directory where library will be created, defaults to '.'") do |dir|
+          raw_config[:dir] = dir
+        end
+
+        opts.unknown_args do |before_double_dash, rest|
+          raw_config[:name] = before_double_dash[0]
+        end
+      end
+
+      def build(raw_config)
+        Runner.new(raw_config)
+      end
+
+      def default_config
+        { :author_name => git_author_name,
+          :dir => "." }
+      end
+
+      def git_author_name
+        `git config --get user.name`.strip
       end
     end
   end
+
+  Registry.add_runner("library", Library::RunnerFactory.new)
 end
