@@ -37,6 +37,8 @@ module Generate
       def parse_opts(opts)
         initialize
 
+        opts.banner = "generate library NAME"
+
         opts.on("--author AUTHOR_NAME",
                 "Author name, example: 'John Smith', defaults to git configuration") do |author_name|
           raw_config[:author_name] = author_name
