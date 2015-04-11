@@ -18,19 +18,19 @@ module Generate
       end
     end
 
-    generate_template LibsKeepView, View, "../../../template/.keep.ecr", "libs/.keep"
-    generate_template SpecKeepView, View, "../../../template/.keep.ecr", "spec/#{config.name}/.keep"
+    generate_template LibsKeepView, View, "src/template/.keep.ecr", "libs/.keep"
+    generate_template SpecKeepView, View, "src/template/.keep.ecr", "spec/#{config.name}/.keep"
 
-    generate_template LicenseView, View, "../../../template/LICENSE.ecr", "LICENSE"
-    generate_template GitignoreView, View, "../../../template/.gitignore.ecr", ".gitignore"
-    generate_template ProjectfileView, View, "../../../template/Projectfile.ecr", "Projectfile"
-    generate_template ReadmeView, View, "../../../template/README.md.ecr", "README.md"
-    generate_template TravisView, View, "../../../template/.travis.yml.ecr", ".travis.yml"
+    generate_template LicenseView, View, "src/template/LICENSE.ecr", "LICENSE"
+    generate_template GitignoreView, View, "src/template/.gitignore.ecr", ".gitignore"
+    generate_template ProjectfileView, View, "src/template/Projectfile.ecr", "Projectfile"
+    generate_template ReadmeView, View, "src/template/README.md.ecr", "README.md"
+    generate_template TravisView, View, "src/template/.travis.yml.ecr", ".travis.yml"
 
-    generate_template SrcMainModuleView, View, "../../../template/src/example.cr.ecr", "src/#{config.name}.cr"
-    generate_template VersionView, View, "../../../template/src/example/version.cr.ecr", "src/#{config.name}/version.cr"
+    generate_template SrcMainModuleView, View, "src/template/src/example.cr.ecr", "src/#{config.name}.cr"
+    generate_template VersionView, View, "src/template/src/example/version.cr.ecr", "src/#{config.name}/version.cr"
 
-    generate_template SpecHelperView, View, "../../../template/spec/spec_helper.cr.ecr", "spec/spec_helper.cr"
-    generate_template SpecMainModuleView, View, "../../../template/spec/example_spec.cr.ecr", "spec/#{config.name}_spec.cr"
+    generate_template SpecHelperView, View, "src/template/spec/spec_helper.cr.ecr", "spec/spec_helper.cr"
+    generate_template SpecMainModuleView, View, "src/template/spec/example_spec.cr.ecr", "spec/#{config.name}_spec.cr"
   end
 end
